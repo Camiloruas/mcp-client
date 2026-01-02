@@ -2,10 +2,10 @@
   "name": "mcp-client",
   "version": "1.0.0",
   "description": "Cliente Node.js/TypeScript para interagir com a API MCP (Model Context Protocol)",
-  "main": "mcp.ts",
+  "main": "mcp.js",
   "type": "module",
   "scripts": {
-    "start": "node mcp.ts",
+    "start": "node mcp.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
