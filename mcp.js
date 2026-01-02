@@ -34,7 +34,7 @@ if (!text) {
 // ==============================
 async function run() {
   try {
-    const response = await fetch(`${MCP_BASE_URL}/tools/ai/agent`, {
+    const response = await fetch(`${MCP_BASE_URL}/agent/workflow/from-text`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
