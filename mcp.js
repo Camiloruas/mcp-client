@@ -1,45 +1,74 @@
-#!/usr/bin/env node
+import dotenv from "dotenv";
 import fetch from "node-fetch";
-import "dotenv/config";
 
-const text = process.argv.slice(2).join(" ");
+dotenv.config();
 
-if (!text) {
-  console.error("Uso: mcp \"seu comando aqui\"");
+// ==============================
+// Validação de ambiente
+// ==============================
+const MCP_BASE_URL = process.env.MCP_BASE_URL;
+const MCP_API_KEY = process.env.MCP_API_KEY;
+
+if (!MCP_BASE_URL) {
+  console.error("MCP_BASE_URL não definido no .env");
   process.exit(1);
 }
 
-const MCP_BASE_URL = process.env.MCP_BASE_URL!;
-const MCP_API_KEY = process.env.MCP_API_KEY!;
+if (!MCP_API_KEY) {
+  console.error("MCP_API_KEY não definido no .env");
+  process.exit(1);
+}
 
+// ==============================
+// Leitura do texto do terminal
+// ==============================
+const text = process.argv.slice(2).join(" ");
+
+if (!text) {
+  console.error('Uso: mcp "texto em linguagem natural"');
+  process.exit(1);
+}
+
+// ==============================
+// Chamada ao MCP Server (agent)
+// ==============================
 async function run() {
-  const response = await fetch(
-    `${MCP_BASE_URL}/agent/workflow/from-text`,
-    {
+  try {
+    const response = await fetch(`${MCP_BASE_URL}/tools/ai/agent`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "x-api-key": MCP_API_KEY,
       },
       body: JSON.stringify({
-        input: {
-          text
-        }
+        input: { text },
       }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Erro do MCP Server:");
+      console.error(errorText);
+      process.exit(1);
     }
-  );
 
-  const data = await response.json();
+    const result = await response.json();
 
-  if (!response.ok) {
-    console.error("Erro:", data);
+    // ==============================
+    // Output amigável no terminal
+    // ==============================
+    if (result.url) {
+      console.log("✔ Ação executada com sucesso:");
+      console.log(result.url);
+    } else {
+      console.log("✔ Resposta do MCP:");
+      console.log(JSON.stringify(result, null, 2));
+    }
+  } catch (err) {
+    console.error("Erro ao executar MCP Client:");
+    console.error(err.message || err);
     process.exit(1);
   }
-
-  console.log("✅ Resultado:");
-  console.log(JSON.stringify(data, null, 2));
 }
 
-run().catch(err => {
-  console.error("Erro fatal:", err);
-});
+run();
