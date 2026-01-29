@@ -143,9 +143,12 @@ No modification to the MCP Server is necessary to create new clients.
 
 Camilo Ruas
 
-GitHub: https://github.com/Camiloruas
-LinkedIn: https://www.linkedin.com/in/camilo-ruas-3a2a6425/
-Portfolio: https://www.camiloruas.dev/
+GitHub: https://github.com/Camiloruas  
+LinkedIn: https://www.linkedin.com/in/camilo-ruas-3a2a6425/  
+Portfolio: https://www.camiloruas.dev/  
+
+
+---
 
 
 # MCP Client (Português)
