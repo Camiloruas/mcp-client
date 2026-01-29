@@ -296,6 +296,6 @@ Nenhuma modificação no MCP Server é necessária para criar novos clients.
 
 Camilo Ruas
 
-GitHub: https://github.com/Camiloruas
-LinkedIn: https://www.linkedin.com/in/camilo-ruas-3a2a6425/
-Portfólio: https://www.camiloruas.dev/
+GitHub: https://github.com/Camiloruas  
+LinkedIn: https://www.linkedin.com/in/camilo-ruas-3a2a6425/  
+Portfólio: https://www.camiloruas.dev/  
